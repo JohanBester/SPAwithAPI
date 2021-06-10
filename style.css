@@ -1,5 +1,6 @@
 #jumbotron {
-  background: url(assets/img/photo-1528334713982-2d1fe11a157a.jfif) center center no-repeat;
+  background: url(assets/img/photo-1528334713982-2d1fe11a157a.jfif) center
+    center no-repeat;
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -29,12 +30,12 @@ form {
 }
 
 form > * {
-  margin: .5rem;
+  margin: 0.5rem;
 }
 
-form > input[type=submit] {
+form > input[type="submit"] {
   width: 40%;
-  margin: .5rem;
+  margin: 0.5rem;
   margin-right: auto;
 }
 
@@ -64,7 +65,7 @@ footer {
   margin: auto;
 }
 
-@media (max-width: 549px){
+@media (max-width: 549px) {
   .hidden--mobile {
     display: none !important;
   }
@@ -88,7 +89,7 @@ footer {
   }
 
   nav > ul > li {
-    padding: .5rem;
+    padding: 0.5rem;
     list-style-type: none;
   }
 
@@ -117,7 +118,7 @@ footer {
     display: inline-block;
     text-decoration: none;
     border: 1px solid;
-    padding: .5rem .5rem;
+    padding: 0.5rem 0.5rem;
     border-radius: 25px;
   }
 
@@ -141,4 +142,25 @@ footer {
     grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
     background-color: white;
   }
+}
+
+#pizzas {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.2em;
+  height: auto;
+  width: 92.5%;
+  margin: auto;
+}
+
+#pizzas tbody {
+  width: 100%;
+}
+
+#pizzas th {
+  text-align: left;
+}
+
+#pizzas td,
+th {
+  width: 25%;
 }

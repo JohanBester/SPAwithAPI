@@ -21,8 +21,8 @@ function render(st = state.Home) {
 
 function addEventListeners(st) {
   // add event listeners to Nav items for navigation
-  document.querySelectorAll("nav a").forEach(navLink =>
-    navLink.addEventListener("click", event => {
+  document.querySelectorAll("nav a").forEach((navLink) =>
+    navLink.addEventListener("click", (event) => {
       event.preventDefault();
       render(state[event.target.title]);
     })
@@ -37,7 +37,7 @@ function addEventListeners(st) {
 
   // event listener for the the photo form
   if (st.view === "Form") {
-    document.querySelector("form").addEventListener("submit", event => {
+    document.querySelector("form").addEventListener("submit", (event) => {
       event.preventDefault();
       // convert HTML elements to Array
       let inputList = Array.from(event.target.elements);
@@ -57,16 +57,29 @@ function addEventListeners(st) {
 
 router.hooks({
   before: (done, params) => {
-    const page = params && params.hasOwnProperty("page") ? capitalize(params.page) : "Home";
+    const page =
+      params && params.hasOwnProperty("page")
+        ? capitalize(params.page)
+        : "Home";
+
+    if (page === "Pizzas") {
+      state.Pizzas.pizzas = [];
+      axios.get(`${process.env.PIZZAS_API_URL}/pizzas`).then((response) => {
+        state.Pizzas.pizzas = response.data;
+        done();
+      });
+    }
 
     if (page === "Blog") {
       state.Blog.posts = [];
-      axios.get("https://jsonplaceholder.typicode.com/posts").then(response => {
-        response.data.forEach(post => {
-          state.Blog.posts.push(post);
-          done();
+      axios
+        .get("https://jsonplaceholder.typicode.com/posts")
+        .then((response) => {
+          response.data.forEach((post) => {
+            state.Blog.posts.push(post);
+            done();
+          });
         });
-      });
     }
 
     if (page === "Home") {
@@ -74,7 +87,7 @@ router.hooks({
         .get(
           `https://api.openweathermap.org/data/2.5/weather?appid=fbb30b5d6cf8e164ed522e5082b49064&q=st.%20louis`
         )
-        .then(response => {
+        .then((response) => {
           state.Home.weather = {};
           state.Home.weather.city = response.data.name;
           state.Home.weather.temp = response.data.main.temp;
@@ -82,14 +95,14 @@ router.hooks({
           state.Home.weather.description = response.data.weather[0].main;
           done();
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     }
-  }
+  },
 });
 
 router
   .on({
     "/": () => render(state.Home),
-    ":page": params => render(state[capitalize(params.page)])
+    ":page": (params) => render(state[capitalize(params.page)]),
   })
   .resolve();
