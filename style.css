@@ -26,11 +26,12 @@ form {
   border: solid 1px black;
   display: flex;
   flex-direction: column;
-  margin: 1rem 1rem;
+  margin: 2rem 4rem;
+  padding: 2rem;
 }
 
 form > * {
-  margin: 0.5rem;
+  margin: 0.8rem;
 }
 
 form > input[type="submit"] {
@@ -162,5 +163,13 @@ footer {
 
 #pizzas td,
 th {
-  width: 25%;
+  width: auto;
+}
+
+#blog {
+  margin: 60px;
+}
+
+#blog hr {
+  width: 80%;
 }

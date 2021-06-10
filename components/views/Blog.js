@@ -1,9 +1,9 @@
 import html from "html-literal";
 
-export default st => html`
+export default (st) => html`
   <section id="blog">
     ${st.posts
-      .map(post => {
+      .map((post) => {
         return formatBlogPost(post);
       })
       .join("")}
@@ -13,8 +13,11 @@ export default st => html`
 function formatBlogPost(post) {
   return `
     <div class="blog-post">
-      <h4>${post.title} by User ${post.userId}</h4>
+      <h2>${post.title}</h2>
+      <h5>by User ${post.userId}</h5>
       <p>${post.body}</p>
+      <hr>
+      <br />
     </div>
   `;
 }
